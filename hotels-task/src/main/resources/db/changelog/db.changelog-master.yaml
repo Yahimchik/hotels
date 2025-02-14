@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-tag-1.0.0
+      author: "Egor Yahimovich"
+      changes:
+        - tagDatabase:
+            tag: v.1.0.0
+  - include:
+      file: db/changelog/V.1.0.0/2025-02-11-create-addresses.xml
+  - include:
+      file: db/changelog/V.1.0.0/2025-02-11-create-amenities.xml
+  - include:
+      file: db/changelog/V.1.0.0/2025-02-11-create-arrival-times.xml
+  - include:
+      file: db/changelog/V.1.0.0/2025-02-11-create-contacts.xml
+  - include:
+      file: db/changelog/V.1.0.0/2025-02-11-create-hotels.xml

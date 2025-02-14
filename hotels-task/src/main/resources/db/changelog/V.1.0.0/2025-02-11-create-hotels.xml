@@ -1,0 +1,41 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                       https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <changeSet id="2025-02-11-create-hotels" author="Egor Yahimovich">
+        <createTable tableName="hotels">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="brand" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_hotel_address" references="addresses(id)"/>
+            </column>
+            <column name="contacts_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_hotel_contacts" references="contacts(id)"/>
+            </column>
+            <column name="arrival_time_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_hotel_arrival_time" references="arrival_times(id)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="hotel_amenities">
+            <column name="hotel_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_hotel_amenities_hotel" references="hotels(id)"/>
+            </column>
+            <column name="amenity_id" type="UUID">
+                <constraints nullable="false" foreignKeyName="fk_hotel_amenities_amenity" references="amenities(id)"/>
+            </column>
+        </createTable>
+        <addPrimaryKey constraintName="pk_hotel_amenities"
+                       tableName="hotel_amenities"
+                       columnNames="hotel_id, amenity_id"/>
+    </changeSet>
+</databaseChangeLog>
